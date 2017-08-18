@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<job-scheduling-data version="2.0" xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd">
+		
+	<schedule>
+		<job>
+			<name>job1</name>
+			<group>DEFAULT</group>
+			<job-class>com.lemo.job.DemoJob</job-class>
+			<durability>true</durability>
+			<recover>false</recover>
+		</job>
+
+
+		<trigger>
+			<simple>
+				<name>job1_trigger</name>
+				<group>DEFAULT</group>
+				<job-name>job1</job-name>
+				<job-group>DEFAULT</job-group>
+                <repeat-count>-1</repeat-count>
+                <repeat-interval>4000</repeat-interval>
+			</simple>
+		</trigger>
+
+
+
+		
+	</schedule>
+    <schedule>
+        <job>
+            <name>job2</name>
+            <group>DEFAULT</group>
+            <job-class>com.lemo.job.DemoJob2</job-class>
+        </job>
+        <trigger>
+            <cron>
+                <name>cron_trigger</name>
+                <group>DEFAULT</group>
+                <job-name>job2</job-name>
+                <job-group>DEFAULT</job-group>
+                <cron-expression>0/4 * * ? * *</cron-expression>
+            </cron>
+        </trigger>
+    </schedule>
+
+    <schedule>
+        <job>
+            <name>job3</name>
+            <group>DEFAULT</group>
+            <job-class>com.lemo.job.DemoJob3</job-class>
+        </job>
+        <trigger>
+            <calendar-interval>
+                <name>calendar_interval_trigger</name>
+                <job-name>job3</job-name>
+                <job-group>DEFAULT</job-group>
+                <repeat-interval>2</repeat-interval>
+                <repeat-interval-unit>SECOND</repeat-interval-unit>
+            </calendar-interval>
+        </trigger>
+    </schedule>
+	
+</job-scheduling-data>

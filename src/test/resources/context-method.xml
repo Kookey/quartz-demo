@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+
+    <bean id="tigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="name" value="tigger1"></property>
+        <property name="group" value="group1"></property>
+        <property name="repeatCount" value="3"></property>
+        <property name="repeatInterval" value="3000"></property>
+        <property name="jobDetail" ref="methodJobDetail"></property>
+    </bean>
+
+    <bean id="methodJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetClass" value="com.lemo.method.Simple"></property>
+        <property name="targetMethod" value="test"></property>
+    </bean>
+
+
+
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="configLocation" value="classpath:quartz.properties"></property>
+        <property name="triggers" ref="tigger"></property>
+    </bean>
+</beans>
